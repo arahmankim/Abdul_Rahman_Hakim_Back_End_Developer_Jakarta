@@ -1,0 +1,11 @@
+select lowongan.nama_posisi, 
+       lowongan.jabatan,
+       lowongan.slot,
+       lowongan.fl_aktif,
+       case when pelamar.no_data_plm is not null then 'Sudah'
+       else 'belum' end as status
+       --lowongan_log.*,
+       --SUM(LOWONGAN_LOG.no_data_low) as jumlah_pelamar
+from lowongan
+left join LOWONGAN_LOG on LOWONGAN_LOG.no_data_job = lowongan.no_data_job and lowongan_log.no_data_plm = 1
+left join pelamar on pelamar.no_data_plm = lowongan_log.no_data_plm

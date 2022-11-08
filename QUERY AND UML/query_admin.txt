@@ -1,0 +1,9 @@
+select lowongan.nama_posisi, 
+	   lowongan.jabatan,
+       lowongan.slot,
+       lowongan.fl_aktif, --lowongan_log.*,
+       SUM(LOWONGAN_LOG.no_data_low) as jumlah_pelamar
+from lowongan
+inner join LOWONGAN_LOG on LOWONGAN_LOG.no_data_job = lowongan.no_data_job
+where lowongan_log.no_data_low is not null
+group by lowongan.nama_posisi, lowongan.jabatan, lowongan.slot, lowongan.fl_aktif

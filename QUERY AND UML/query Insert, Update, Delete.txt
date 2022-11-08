@@ -1,0 +1,46 @@
+admin
+--------------------------
+insert into lowongan(nama_posisi,jabatan,slot,fl_aktif)
+value(*input user*)
+
+update lowongan
+nama_posisi=..., jabatan=..., slot=..., fl_aktif=...
+where no_data_job = *input user*
+
+delete from lowongan where no_data_job = *input user*
+
+delete from lowongan_log where no_data_job = *input user*
+
+user
+--------------------------
+insert into pelamar(no_data_user,nama_lengkap,nama_pgl,alamat,tgl_lahir,
+gender,no_ktp,no_hp)
+value(*input user*)
+
+insert into pendidikan(no_data_plm,nama_sekolah,tingkat_pd,jurusan,thn_lulus)
+value(*input user*)
+
+insert into riwayat_kerja(no_data_plm,nama_persh,tgl_mulai,tgl_selesai,jabatan)
+value(*input user*)
+
+insert into lowongan_log(no_data_job,no_data_plm,fl_status)
+value(*input user*)
+
+update pelamar
+set no_data_user=..., nama_lengkap=..., nama_pgl=..., alamat=...,
+tgl_lahir=..., gender=..., no_ktp=..., no_hp=...
+where no_data_plm=*input user*
+
+update pendidikan
+set no_data_plm=..., nama_sekolah=..., tingkat_pd=.., jurusan=...,
+thn_lulus=...
+where no_data_pd = *input user*
+
+update riwayat_kerja
+set no_data_plm=..., nama_persh=..., tgl_mulai=..., tgl_selesai=...,
+jabatan=...
+where no_data_rk = *input user*
+
+update lowongan_log
+no_data_job=..., no_data_plm=..., fl_status=...
+where no_data_plm = *input user* and no_data_job = *input user*

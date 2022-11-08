@@ -1,0 +1,65 @@
+CREATE DATABASE JobVacancy
+
+CREATE TABLE USER (
+    no_data_user int NOT NULL	AUTO_INCREMENT,
+    username	 varchar(12),
+    password 	 varchar(20),
+    email 	 varchar(255),
+    fl_user 	 varchar(1),
+    PRIMARY KEY (no_data_user)
+);
+
+CREATE TABLE PELAMAR (
+    no_data_plm	 int NOT NULL,
+    nama_lengkap varchar(100),
+    nama_pgl 	 varchar(20),
+    alamat 	 varchar(255),
+    tgl_lahir 	 date,
+    gender	 varchar(1),
+    no_ktp	 varchar(16),
+    no_hp	 varchar(18),
+    no_data_job	 int,
+    PRIMARY KEY (no_data_plm),
+    FOREIGN KEY (no_data_user) REFERENCES USER(no_data_user)
+);
+
+CREATE TABLE PENDIDIKAN (
+    no_data_pd	 int NOT NULL,    
+    no_data_plm int,
+    nama_sekolah varchar(150),
+    tingkat_pd	 varchar(4),
+    jurusan 	 varchar(150),
+    tahun_lulus  varchar(4),
+    PRIMARY KEY (no_data_pd),
+    FOREIGN KEY (no_data_plm) REFERENCES PELAMAR(no_data_plm)
+);
+
+CREATE TABLE RIWAYAT_KERJA (
+    no_data_rk	 int NOT NULL,    
+    no_data_plm int,
+    nama_persh	 varchar(150),
+    jabatan 	 varchar(150),
+    tgl_mulai	 date,
+    tgl_selesai	 date,
+    PRIMARY KEY (no_data_rk),
+    FOREIGN KEY (no_data_plm) REFERENCES PELAMAR(no_data_plm)
+);
+
+CREATE TABLE LOWONGAN (
+    no_data_job	 int NOT NULL,
+    nama_posisi	 varchar(225),
+    jabatan	 varchar(20),
+    slot 	 int,
+    fl_aktif  	 varchar(1),
+    PRIMARY KEY (no_data_job),
+);
+
+CREATE TABLE LOWONGAN_LOG (
+    no_data_low	 int NOT NULL	AUTO INCEREMENT,
+    no_data_job	 int,
+    no_data_plm	 int,
+    fl_status	 varchar(1),
+    PRIMARY KEY (no_data_low),
+    FOREIGN KEY (no_data_plm) REFERENCES PELAMAR(no_data_plm),
+    FOREIGN KEY (no_data_job) REFERENCES LOWONGAN(no_data_job)
+);
